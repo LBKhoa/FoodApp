@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="khoalb.ntu.foodappoder" />
+                  <option name="mobileSdkAppId" value="1:709660060622:android:93708a1c9158c48d36599f" />
+                  <option name="projectId" value="foodappoder-a708d" />
+                  <option name="projectNumber" value="709660060622" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

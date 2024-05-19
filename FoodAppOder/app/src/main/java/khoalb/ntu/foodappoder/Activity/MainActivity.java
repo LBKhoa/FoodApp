@@ -1,5 +1,6 @@
 package khoalb.ntu.foodappoder.Activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
@@ -27,6 +28,8 @@ ActivityMainBinding binding;
         });
 
         setVariable();
+
+        getWindow().setStatusBarColor(Color.parseColor("#FFE485"));
     }
 
     private void setVariable() {
