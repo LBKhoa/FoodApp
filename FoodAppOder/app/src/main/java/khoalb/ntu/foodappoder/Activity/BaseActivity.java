@@ -16,6 +16,8 @@ import khoalb.ntu.foodappoder.R;
 public class BaseActivity extends AppCompatActivity {
 FirebaseAuth mAuth;
 FirebaseDatabase database;
+
+public String TAG = "uilover";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
