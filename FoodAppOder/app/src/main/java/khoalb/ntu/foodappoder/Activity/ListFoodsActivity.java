@@ -5,7 +5,6 @@ import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -20,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import khoalb.ntu.foodappoder.Adapter.FoodListAdapter;
 import khoalb.ntu.foodappoder.Domain.Foods;
 import khoalb.ntu.foodappoder.R;
 import khoalb.ntu.foodappoder.databinding.ActivityListFoodsBinding;
@@ -45,9 +45,7 @@ public class ListFoodsActivity extends BaseActivity {
         });
 
         getIntentExtra();
-
         initList();
-        
     }
 
     private void initList() {
@@ -70,8 +68,10 @@ public class ListFoodsActivity extends BaseActivity {
                     }
                     if (list.size()>0){
                         binding.foodListView.setLayoutManager(new GridLayoutManager(ListFoodsActivity.this,2));
-                        adapterListFood = new
+                        adapterListFood = new FoodListAdapter(list);
+                        binding.foodListView.setAdapter(adapterListFood);
                     }
+                    binding.progressBar.setVisibility(View.GONE);
                 }
             }
 
@@ -84,16 +84,11 @@ public class ListFoodsActivity extends BaseActivity {
 
     private void getIntentExtra() {
         categoryId = getIntent().getIntExtra("CategoryId",0);
-        categoryName = getIntent().getStringExtra("Category");
-        searchText = getIntent().getStringExtra("Text");
+        categoryName = getIntent().getStringExtra("CategoryName");
+        searchText = getIntent().getStringExtra("text");
         isSrearch = getIntent().getBooleanExtra("isSearch",false);
 
         binding.titleTxt.setText(categoryName);
-        binding.backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        binding.backBtn.setOnClickListener(v -> finish());
     }
 }

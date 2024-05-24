@@ -1,6 +1,8 @@
 package khoalb.ntu.foodappoder.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 
 import java.util.ArrayList;
 
+import khoalb.ntu.foodappoder.Activity.ListFoodsActivity;
 import khoalb.ntu.foodappoder.Domain.Category;
 import khoalb.ntu.foodappoder.Domain.Foods;
 import khoalb.ntu.foodappoder.R;
@@ -78,6 +81,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewho
         Glide.with(context)
                 .load(drawableResourceId)
                 .into(holder.pic);
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ListFoodsActivity.class);
+                intent.putExtra("CategoryId",items.get(position).getId());
+                intent.putExtra("CategoryName",items.get(position).getName());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

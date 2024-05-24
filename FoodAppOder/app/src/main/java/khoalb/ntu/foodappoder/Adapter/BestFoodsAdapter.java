@@ -1,7 +1,6 @@
 package khoalb.ntu.foodappoder.Adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +62,7 @@ public class BestFoodsAdapter extends RecyclerView.Adapter<BestFoodsAdapter.view
             priceTxt = itemView.findViewById(R.id.priceTxt);
             starTxt = itemView.findViewById(R.id.starTxt);
             timeTxt = itemView.findViewById(R.id.timeTxt);
-            pic = itemView.findViewById(R.id.pic);
+            pic = itemView.findViewById(R.id.img);
         }
     }
 }
