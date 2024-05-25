@@ -27,8 +27,9 @@ import khoalb.ntu.foodappoder.databinding.ActivityListFoodsBinding;
 public class ListFoodsActivity extends BaseActivity {
     ActivityListFoodsBinding binding;
     private RecyclerView.Adapter adapterListFood;
-    private int categoryId;
-    private String categoryName;
+    private ArrayList<Foods> list;  // Danh sách dữ liệu
+    private int CategoryId;
+    private String CategoryName;
     private String searchText;
     private boolean isSrearch;
 
@@ -49,46 +50,54 @@ public class ListFoodsActivity extends BaseActivity {
     }
 
     private void initList() {
+        list = new ArrayList<>();
+        adapterListFood = new FoodListAdapter(list);
+        binding.foodListView.setLayoutManager(new GridLayoutManager(ListFoodsActivity.this, 2));
+        binding.foodListView.setAdapter(adapterListFood);
+
         DatabaseReference myRef = database.getReference("Foods");
         binding.progressBar.setVisibility(View.VISIBLE);
-        ArrayList<Foods> list = new ArrayList<>();
 
         Query query;
-        if (isSrearch){
-            query = myRef.orderByChild("Title").startAt(searchText).endAt(searchText+'\uf8ff');
-        }else {
-            query = myRef.orderByChild("CategoryId").equalTo(categoryId);
+        if (isSrearch) {
+            query = myRef.orderByChild("Title").startAt(searchText).endAt(searchText + '\uf8ff');
+        } else {
+            query = myRef.orderByChild("CategoryId").equalTo(CategoryId);
         }
+
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    for (DataSnapshot issue : snapshot.getChildren()){
-                        list.add(issue.getValue(Foods.class));
+                if (snapshot.exists()) {
+                    for (DataSnapshot issue : snapshot.getChildren()) {
+                        Foods food = issue.getValue(Foods.class);
+                        if (food != null) {
+                            list.add(food);
+                        }
                     }
-                    if (list.size()>0){
-                        binding.foodListView.setLayoutManager(new GridLayoutManager(ListFoodsActivity.this,2));
-                        adapterListFood = new FoodListAdapter(list);
-                        binding.foodListView.setAdapter(adapterListFood);
-                    }
+                    adapterListFood.notifyDataSetChanged();
                     binding.progressBar.setVisibility(View.GONE);
+                } else {
+                    binding.progressBar.setVisibility(View.GONE);
+                    // Handle case when no data found, maybe show a message to user
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                binding.progressBar.setVisibility(View.GONE);
+                // Handle the error, maybe show a message to user
             }
         });
     }
 
     private void getIntentExtra() {
-        categoryId = getIntent().getIntExtra("CategoryId",0);
-        categoryName = getIntent().getStringExtra("CategoryName");
+        CategoryId = getIntent().getIntExtra("CategoryId", 0);
+        CategoryName = getIntent().getStringExtra("CategoryName");
         searchText = getIntent().getStringExtra("text");
-        isSrearch = getIntent().getBooleanExtra("isSearch",false);
+        isSrearch = getIntent().getBooleanExtra("isSearch", false);
 
-        binding.titleTxt.setText(categoryName);
+        binding.titleTxt.setText(CategoryName);
         binding.backBtn.setOnClickListener(v -> finish());
     }
 }

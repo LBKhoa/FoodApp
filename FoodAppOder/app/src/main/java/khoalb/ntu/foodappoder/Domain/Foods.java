@@ -5,13 +5,13 @@ public class Foods {
     private String Description;
     private boolean BestFood;
     private int Id;
-    private int locationId;
+    private int LocationId;
     private double Price;
     private String ImagePath;
     private int PriceId;
     private double Star;
-    private int timeId;
-    private int timeValue;
+    private int TimeId;
+    private int TimeValue;
     private String Title;
     private int numberInCart;
 
@@ -56,11 +56,11 @@ public class Foods {
     }
 
     public int getLocationId() {
-        return locationId;
+        return LocationId;
     }
 
     public void setLocationId(int locationId) {
-        this.locationId = locationId;
+        this.LocationId = locationId;
     }
 
     public double getPrice() {
@@ -96,19 +96,19 @@ public class Foods {
     }
 
     public int getTimeId() {
-        return timeId;
+        return TimeId;
     }
 
     public void setTimeId(int timeId) {
-        this.timeId = timeId;
+        this.TimeId = timeId;
     }
 
     public int getTimeValue() {
-        return timeValue;
+        return TimeValue;
     }
 
     public void setTimeValue(int timeValue) {
-        this.timeValue = timeValue;
+        this.TimeValue = timeValue;
     }
 
     public String getTitle() {
