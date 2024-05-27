@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -12,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.bumptech.glide.Glide;
 
 import khoalb.ntu.foodappoder.Domain.Foods;
+import khoalb.ntu.foodappoder.Helper.ManagmentCart;
 import khoalb.ntu.foodappoder.R;
 import khoalb.ntu.foodappoder.databinding.ActivityDetailBinding;
 
@@ -19,6 +19,7 @@ public class DetailActivity extends BaseActivity {
     ActivityDetailBinding biding;
     private Foods object;
     private int num = 1;
+    private ManagmentCart managmentCart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,7 @@ public class DetailActivity extends BaseActivity {
     }
 
     private void setVariable() {
+        managmentCart = new ManagmentCart(this);
         biding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +55,32 @@ public class DetailActivity extends BaseActivity {
         biding.rateTxt.setText(object.getStar()+"Đánh giá");
         biding.ratingBar.setRating((float) object.getStar());
         biding.totalTxt.setText((num*object.getPrice()+"$"));
+
+        biding.plusBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                num = num + 1;
+                biding.numTxt.setText(num+" ");
+                biding.totalTxt.setText("$"+(num * object.getPrice()));
+            }
+        });
+        biding.minusBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (num > 1){
+                    num = num - 1;
+                    biding.numTxt.setText(num+" ");
+                    biding.totalTxt.setText("$"+(num * object.getPrice()));
+                }
+            }
+        });
+        biding.addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                object.setNumberInCart(num);
+                managmentCart.insertFood(object);
+            }
+        });
     }
 
     private void getIntentExtra() {
