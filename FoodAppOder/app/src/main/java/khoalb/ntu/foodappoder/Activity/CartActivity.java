@@ -22,6 +22,7 @@ public class CartActivity extends BaseActivity {
     private ManagmentCart managmentCart;
     private double tax;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

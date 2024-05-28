@@ -26,6 +26,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.viewholdel> {
     private ManagmentCart managmentCart;
     ChangeNumberItemsListener changeNumberItemsListener;
 
+
     public CartAdapter(ArrayList<Foods> list, Context context, ChangeNumberItemsListener changeNumberItemsListener) {
         this.list = list;
         managmentCart = new ManagmentCart(context);

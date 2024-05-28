@@ -2,60 +2,89 @@ package khoalb.ntu.foodappoder.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import khoalb.ntu.foodappoder.Helper.UserHelper;
 import khoalb.ntu.foodappoder.R;
-import khoalb.ntu.foodappoder.databinding.ActivityMainBinding;
-import khoalb.ntu.foodappoder.databinding.ActivitySignupBinding;
 
-public class SignupActivity extends BaseActivity {
-    ActivitySignupBinding binding;
+public class SignupActivity extends AppCompatActivity {
+    EditText signupName, signupEmail, signupUsername, signupPassword;
+    TextView loginRedirecTxt;
+    Button signupBtn;
+    FirebaseDatabase database;
+    DatabaseReference reference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySignupBinding.inflate(getLayoutInflater());
         EdgeToEdge.enable(this);
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_signup);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        setVariable();
-    }
+        signupName = findViewById(R.id.signup_name);
+        signupEmail = findViewById(R.id.signup_email);
+        signupUsername = findViewById(R.id.signup_user);
+        signupPassword = findViewById(R.id.signup_pass);
+        signupBtn = findViewById(R.id.signupBtn);
+        loginRedirecTxt = findViewById(R.id.loginRedirecTxt);
 
-    private void setVariable() {
-        binding.signupBtn.setOnClickListener(v -> {
-            String email = binding.userEdt.getText().toString();
-            String password = binding.passEdt.getText().toString();
+        signupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                database = FirebaseDatabase.getInstance();
+                reference = database.getReference("users");
 
-            if (password.length() < 6){
-                Toast.makeText(SignupActivity.this,"Mật khẩu của bạn không đủ 6 ký tự",Toast.LENGTH_SHORT).show();
-                return;
+                String name = signupName.getText().toString();
+                String email = signupEmail.getText().toString();
+                String username = signupUsername.getText().toString();
+                String password = signupPassword.getText().toString();
+
+                UserHelper userHelper = new UserHelper(name, email, username, password);
+                reference.child(username).setValue(userHelper);
+
+                // Create a new cart node for the user
+                DatabaseReference cartRef = reference.child(username).child("cart");
+                Map<String, Object> initialCartData = new HashMap<>();
+                initialCartData.put("items", new HashMap<>()); // Initialize cart items as empty
+                initialCartData.put("total", 0); // Initialize total as 0
+                cartRef.setValue(initialCartData);
+
+                Toast.makeText(SignupActivity.this, "Bạn đã đăng ký thành công", Toast.LENGTH_SHORT).show();
+                Intent intent =  new Intent(SignupActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
-            mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(SignupActivity.this, task -> {
-                if (task.isSuccessful()){
-                    Log.i(TAG,"onComplete: ");
-                    startActivity(new Intent(SignupActivity.this,MainActivity.class));
-                }else {
-                    Log.i(TAG,"failure: "+task.getException());
-                    Toast.makeText(SignupActivity.this,"Authentication failed", Toast.LENGTH_SHORT).show();
-                }
-            });
         });
+
+
+
+
+        loginRedirecTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(SignupActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

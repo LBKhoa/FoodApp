@@ -20,6 +20,7 @@ public class DetailActivity extends BaseActivity {
     private Foods object;
     private int num = 1;
     private ManagmentCart managmentCart;
+    private String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,7 @@ public class DetailActivity extends BaseActivity {
 
         getIntentExtra();
         setVariable();
+
     }
 
     private void setVariable() {
