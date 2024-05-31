@@ -57,6 +57,12 @@ public class MainActivity extends BaseActivity {
     }
 
     private void setVariable() {
+
+        Intent intent = getIntent();
+        String name = intent.getStringExtra("name");
+
+        // Sử dụng dữ liệu
+        binding.nameTxt.setText(name);
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

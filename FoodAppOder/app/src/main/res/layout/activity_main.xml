@@ -33,7 +33,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/nameTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lê Bảo Khoa"
@@ -203,12 +203,6 @@
                     android:textSize="22dp"
                     android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/red"
-                    android:text="XEM TẤT CẢ" />
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -246,7 +240,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Choose Category"
+                android:text="CHỌN THEO DANH MỤC"
                 android:textColor="@color/blue_gray"
                 android:textSize="22dp"
                 android:textStyle="bold" />

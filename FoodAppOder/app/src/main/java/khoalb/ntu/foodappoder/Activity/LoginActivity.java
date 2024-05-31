@@ -87,8 +87,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void checkUser(){
+        String name = loginUsername.getText().toString().trim();
         String userUserName = loginUsername.getText().toString().trim();
         String userPassword = loginPassword.getText().toString().trim();
+
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         Query checkUserDatabase = reference.orderByChild("username").equalTo(userUserName);
@@ -101,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                     String passwordFromDB = snapshot.child(userUserName).child("password").getValue(String.class);
 
                     if (Objects.equals(passwordFromDB, userPassword)){
+                        String fullNameFromDB = snapshot.child(name).child("name").getValue(String.class);
                         // Lưu tên người dùng vào SharedPreferences
                         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -108,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                         editor.apply();
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("name", fullNameFromDB); // truyền tên đầy đủ
                         startActivity(intent);
                     }else {
                         loginPassword.setError("Thông tin đăng nhập không hợp lệ");

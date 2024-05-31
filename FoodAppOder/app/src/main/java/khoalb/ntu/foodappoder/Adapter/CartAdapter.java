@@ -99,7 +99,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.viewholdel> {
             totalEachItem = itemView.findViewById(R.id.totalEachItem);
             pic = itemView.findViewById(R.id.pic);
             num = itemView.findViewById(R.id.numberItem);
-
         }
     }
 }

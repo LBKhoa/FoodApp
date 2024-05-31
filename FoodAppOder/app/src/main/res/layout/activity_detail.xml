@@ -33,16 +33,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/favBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/pic"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/pic"
-                    app:srcCompat="@drawable/favorite_white" />
-
-                <ImageView
                     android:id="@+id/backBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -260,7 +250,7 @@
             android:id="@+id/totalTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="$0"
+            android:text="0 VNĐ"
             android:textSize="16sp"
             android:textColor="@color/blue_gray"
             android:textStyle="bold"

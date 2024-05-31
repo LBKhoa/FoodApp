@@ -1,5 +1,6 @@
 package khoalb.ntu.foodappoder.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -37,7 +38,9 @@ public class CartActivity extends BaseActivity {
 
         managmentCart = new ManagmentCart(this);
 
-        setVariable();
+
+        setVariable1();
+        setVariable2();
         caculateCart();
         initList();
     }
@@ -77,7 +80,7 @@ public class CartActivity extends BaseActivity {
         binding.totalTxt.setText("$" + total);
     }
 
-    private void setVariable() {
+    private void setVariable1() {
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,4 +88,14 @@ public class CartActivity extends BaseActivity {
             }
         });
     }
+    private void setVariable2() {
+        binding.btnOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(CartActivity.this, OrderSuccessfulActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
 }

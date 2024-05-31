@@ -46,37 +46,6 @@
                 android:layout_height="match_parent"
                 android:clipToPadding="false" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/editTextText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/grey_background"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:text="Nhập Mã Giảm Giá"
-                    android:textAlignment="center"
-                    android:textColor="@color/blue_gray"
-                    android:textColorHint="@color/blue_gray"
-                    android:textSize="14sp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/button"
-                    style="@android:style/Widget.Button"
-                    android:layout_width="145dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/red_button_background2"
-                    android:text="Áp dụng mã"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
             <TextView
                 android:id="@+id/textView15"
                 android:layout_width="match_parent"
@@ -110,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Giao"
+                    android:text="Phí giao hàng"
                     app:layout_constraintStart_toStartOf="@+id/textView16"
                     app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
@@ -130,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
-                    android:text="$-"
+                    android:text="- VNĐ"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView16" />
 
@@ -140,7 +109,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="$-"
+                    android:text="- VNĐ"
                     app:layout_constraintEnd_toEndOf="@+id/totalFeeTxt"
                     app:layout_constraintTop_toBottomOf="@+id/totalFeeTxt" />
 
@@ -150,7 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="$-"
+                    android:text="- VNĐ"
                     app:layout_constraintEnd_toEndOf="@+id/deliveryTxt"
                     app:layout_constraintTop_toBottomOf="@+id/deliveryTxt" />
 
@@ -183,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
-                    android:text="$-"
+                    android:text="- VNĐ"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView25" />
@@ -191,7 +160,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button3"
+                android:id="@+id/btnOrder"
                 style="@android:style/Widget.Button"
                 android:layout_width="match_parent"
 
