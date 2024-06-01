@@ -16,11 +16,13 @@ import khoalb.ntu.foodappoder.databinding.ActivityIntroBinding;
 
 
 public class IntroActivity extends BaseActivity {
-ActivityIntroBinding binding;
+    ActivityIntroBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Gắn kết dữ liệu của Activity với layout
         binding = ActivityIntroBinding.inflate(getLayoutInflater());
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
@@ -30,20 +32,24 @@ ActivityIntroBinding binding;
             return insets;
         });
 
+        // Thiết lập các biến và sự kiện
         setVariable();
-
         getWindow().setStatusBarColor(Color.parseColor("#FFE485"));
     }
 
+    // Thiết lập các biến và sự kiện
     private void setVariable() {
+        // Sự kiện khi nhấn nút "Đăng nhập"
         binding.loginBtn.setOnClickListener(v -> {
-            if (mAuth.getCurrentUser() !=null){
+            // Kiểm tra nếu người dùng đã đăng nhập
+            if (mAuth.getCurrentUser() != null) {
                 startActivity(new Intent(IntroActivity.this, MainActivity.class));
-            }else {
+            } else {
                 startActivity(new Intent(IntroActivity.this, LoginActivity.class));
             }
         });
 
+        // Sự kiện khi nhấn nút "Đăng ký"
         binding.signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

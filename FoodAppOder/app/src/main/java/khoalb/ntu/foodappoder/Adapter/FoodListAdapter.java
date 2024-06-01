@@ -25,6 +25,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.viewho
     ArrayList<Foods> items;
     Context context;
 
+    // Constructor để nhận danh sách các món ăn và Context
     public FoodListAdapter(ArrayList<Foods> items) {
         this.items = items;
     }
@@ -32,6 +33,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.viewho
     @NonNull
     @Override
     public FoodListAdapter.viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Tạo giao diện cho mỗi mục danh sách món ăn
         context = parent.getContext();
         View inflate = LayoutInflater.from(context).inflate(R.layout.viewholder_list_food,parent,false);
         return new viewholder(inflate);
@@ -39,16 +41,19 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.viewho
 
     @Override
     public void onBindViewHolder(@NonNull FoodListAdapter.viewholder holder, int position) {
+        // Hiển thị thông tin của mỗi món ăn
         holder.titleTxt.setText(items.get(position).getTitle());
         holder.timeTxt.setText(items.get(position).getTimeValue()+ " phút");
-        holder.priceTxt.setText("$" + items.get(position).getPrice());
+        holder.priceTxt.setText(items.get(position).getPrice()+" VNĐ");
         holder.starTxt.setText(" "+items.get(position).getStar());
 
+        // Tải hình ảnh của món ăn từ URL sử dụng Glide và áp dụng hiệu ứng CenterCrop và RoundedCorners
         Glide.with(context)
                 .load(items.get(position).getImagePath())
                 .transform(new CenterCrop(), new RoundedCorners(30))
                 .into(holder.pic);
 
+        // Xử lý sự kiện khi người dùng nhấn vào một món ăn
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,15 +66,17 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.viewho
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return items.size(); // Trả về số lượng món ăn
     }
 
+    // Lớp viewholder để giữ các thành phần giao diện của mỗi mục danh sách món ăn
     public class viewholder extends RecyclerView.ViewHolder {
         TextView titleTxt, priceTxt, starTxt, timeTxt;
         ImageView pic;
+
         public viewholder(@NonNull View itemView) {
             super(itemView);
-
+            // Liên kết các thành phần giao diện với các biến tương ứng
             titleTxt = itemView.findViewById(R.id.titleTxt);
             priceTxt = itemView.findViewById(R.id.priceTxt);
             starTxt = itemView.findViewById(R.id.rateTxt);

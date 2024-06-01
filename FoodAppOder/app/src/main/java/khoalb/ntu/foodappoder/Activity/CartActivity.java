@@ -5,16 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import khoalb.ntu.foodappoder.Adapter.CartAdapter;
 import khoalb.ntu.foodappoder.Helper.ChangeNumberItemsListener;
 import khoalb.ntu.foodappoder.Helper.ManagmentCart;
-import khoalb.ntu.foodappoder.R;
 import khoalb.ntu.foodappoder.databinding.ActivityCartBinding;
 
 public class CartActivity extends BaseActivity {
@@ -23,33 +19,32 @@ public class CartActivity extends BaseActivity {
     private ManagmentCart managmentCart;
     private double tax;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= ActivityCartBinding.inflate(getLayoutInflater());
+
+        // Bắt đầu quá trình gắn kết dữ liệu của Activity với giao diện
+        binding = ActivityCartBinding.inflate(getLayoutInflater());
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
+        // Thiết lập các biến
         managmentCart = new ManagmentCart(this);
 
-
+        // Gọi các phương thức để cài đặt giao diện và tính toán giỏ hàng
         setVariable1();
         setVariable2();
-        caculateCart();
+        calculateCart();
         initList();
     }
 
+    // Khởi tạo danh sách đơn hàng
     private void initList() {
+        // Kiểm tra nếu giỏ hàng trống
         if (managmentCart.getListCart().isEmpty()){
             binding.emptyTxt.setVisibility(View.VISIBLE);
             binding.scrollViewCart.setVisibility(View.GONE);
-        }else {
+        } else {
             binding.emptyTxt.setVisibility(View.GONE);
             binding.scrollViewCart.setVisibility(View.VISIBLE);
         }
@@ -59,27 +54,24 @@ public class CartActivity extends BaseActivity {
         adapter = new CartAdapter(managmentCart.getListCart(), this, new ChangeNumberItemsListener() {
             @Override
             public void change() {
-                caculateCart();
+                calculateCart();
             }
         });
         binding.cartView.setAdapter(adapter);
     }
 
-    private void caculateCart() {
-        double percentTax = 0.02; // 20% thuế
-        double delivery = 10;
+    // Tính toán tổng giỏ hàng
+    private void calculateCart() {
+        double delivery = 10000.0;
+        double total = Math.round(managmentCart.getTotalFee()+ delivery);
+        double itemTotal = Math.round(managmentCart.getTotalFee());
 
-        tax = Math.round(managmentCart.getTotalFee() * percentTax * 100.0)/ 100;
-
-        double total = Math.round((managmentCart.getTotalFee() + tax + delivery) * 100) / 100;
-        double itemTotal = Math.round(managmentCart.getTotalFee() * 100) / 100;
-
-        binding.totalFeeTxt.setText("$" + itemTotal);
-        binding.taxTxt.setText("$"+tax);
-        binding.deliveryTxt.setText("$" + delivery);
-        binding.totalTxt.setText("$" + total);
+        binding.totalFeeTxt.setText(itemTotal+" VNĐ");
+        binding.deliveryTxt.setText(delivery+" VNĐ");
+        binding.totalTxt.setText(total+" VNĐ");
     }
 
+    // Thiết lập sự kiện khi nhấn nút "Back"
     private void setVariable1() {
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,14 +80,18 @@ public class CartActivity extends BaseActivity {
             }
         });
     }
+
+    // Thiết lập sự kiện khi nhấn nút "Order"
     private void setVariable2() {
         binding.btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Xóa các mục trong giỏ hàng trước khi chuyển sang màn hình thành công
+                managmentCart.clearCart();
+
                 Intent intent =  new Intent(CartActivity.this, OrderSuccessfulActivity.class);
                 startActivity(intent);
             }
         });
     }
-
 }

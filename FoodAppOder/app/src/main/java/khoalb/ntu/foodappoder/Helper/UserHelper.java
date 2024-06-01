@@ -1,17 +1,21 @@
 package khoalb.ntu.foodappoder.Helper;
 
 public class UserHelper {
-    String name, email, username, password;
+    private String name;
+    private String email;
+    private String username;
+    private String password;
+    private CartHelper cart;
 
-    public UserHelper(String name, String email, String username, String password) {
+    public UserHelper(String name, String email, String username, String password, CartHelper cart) {
         this.name = name;
         this.email = email;
         this.username = username;
         this.password = password;
+        this.cart = cart;
     }
 
-    public UserHelper() {
-    }
+    // Getters and setters
 
     public String getName() {
         return name;
@@ -44,6 +48,15 @@ public class UserHelper {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public CartHelper getCart() {
+        return cart;
+    }
+
+    public void setCart(CartHelper cart) {
+        this.cart = cart;
+    }
+
     public static String getCurrentUsername() {
         // Trả về tên người dùng hiện tại, có thể lấy từ SharedPreferences hoặc từ một nguồn khác
         return "username"; // Thay thế "username" bằng tên người dùng thực tế

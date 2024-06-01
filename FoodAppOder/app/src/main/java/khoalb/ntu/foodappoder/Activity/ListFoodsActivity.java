@@ -45,15 +45,18 @@ public class ListFoodsActivity extends BaseActivity {
             return insets;
         });
 
+        // Nhận dữ liệu được truyền qua Intent và khởi tạo danh sách
         getIntentExtra();
         initList();
         setVariable();
     }
 
+    // Thiết lập biến và sự kiện
     private void setVariable() {
-
+        // Không có biến hoặc sự kiện nào được thiết lập ở đây trong phiên bản hiện tại
     }
 
+    // Khởi tạo danh sách thức ăn
     private void initList() {
         list = new ArrayList<>();
         adapterListFood = new FoodListAdapter(list);
@@ -84,18 +87,19 @@ public class ListFoodsActivity extends BaseActivity {
                     binding.progressBar.setVisibility(View.GONE);
                 } else {
                     binding.progressBar.setVisibility(View.GONE);
-                    // Handle case when no data found, maybe show a message to user
+                    // Xử lý trường hợp không tìm thấy dữ liệu, có thể hiển thị một thông báo cho người dùng
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 binding.progressBar.setVisibility(View.GONE);
-                // Handle the error, maybe show a message to user
+                // Xử lý lỗi, có thể hiển thị một thông báo cho người dùng
             }
         });
     }
 
+    // Nhận dữ liệu từ Intent
     private void getIntentExtra() {
         CategoryId = getIntent().getIntExtra("CategoryId", 0);
         CategoryName = getIntent().getStringExtra("CategoryName");

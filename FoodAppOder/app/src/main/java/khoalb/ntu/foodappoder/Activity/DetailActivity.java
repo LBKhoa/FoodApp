@@ -16,17 +16,19 @@ import khoalb.ntu.foodappoder.R;
 import khoalb.ntu.foodappoder.databinding.ActivityDetailBinding;
 
 public class DetailActivity extends BaseActivity {
-    ActivityDetailBinding biding;
+    ActivityDetailBinding binding;
     private Foods object;
     private int num = 1;
-    private ManagmentCart managmentCart;
+    private ManagmentCart managementCart;
     private String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        biding = ActivityDetailBinding.inflate(getLayoutInflater());
+        // Gắn kết dữ liệu của Activity với layout
+        binding = ActivityDetailBinding.inflate(getLayoutInflater());
         EdgeToEdge.enable(this);
-        setContentView(biding.getRoot());
+        setContentView(binding.getRoot());
         getWindow().setStatusBarColor(getResources().getColor(R.color.black));
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -34,57 +36,69 @@ public class DetailActivity extends BaseActivity {
             return insets;
         });
 
+        // Nhận dữ liệu được truyền qua Intent
         getIntentExtra();
-        setVariable();
 
+        // Thiết lập các biến và sự kiện
+        setVariable();
     }
 
+    // Thiết lập các biến và sự kiện
     private void setVariable() {
-        managmentCart = new ManagmentCart(this);
-        biding.backBtn.setOnClickListener(new View.OnClickListener() {
+        managementCart = new ManagmentCart(this);
+
+        // Sự kiện khi nhấn nút "Back"
+        binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
 
+        // Hiển thị thông tin sản phẩm
         Glide.with(DetailActivity.this)
                 .load(object.getImagePath())
-                .into(biding.pic);
-        biding.priceTxt.setText("$"+object.getPrice());
-        biding.titleTxt.setText(object.getTitle());
-        biding.decriptionTxt.setText(object.getDescription());
-        biding.rateTxt.setText(object.getStar()+"Đánh giá");
-        biding.ratingBar.setRating((float) object.getStar());
-        biding.totalTxt.setText((num*object.getPrice()+"$"));
+                .into(binding.pic);
+        binding.priceTxt.setText(object.getPrice()+" VNĐ");
+        binding.titleTxt.setText(object.getTitle());
+        binding.decriptionTxt.setText(object.getDescription());
+        binding.rateTxt.setText(object.getStar()+"Đánh giá");
+        binding.ratingBar.setRating((float) object.getStar());
+        binding.totalTxt.setText((num*object.getPrice()+" VNĐ"));
 
-        biding.plusBtn.setOnClickListener(new View.OnClickListener() {
+        // Sự kiện khi nhấn nút "Tăng số lượng"
+        binding.plusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 num = num + 1;
-                biding.numTxt.setText(num+" ");
-                biding.totalTxt.setText("$"+(num * object.getPrice()));
+                binding.numTxt.setText(num+" ");
+                binding.totalTxt.setText((num * object.getPrice()+" VNĐ"));
             }
         });
-        biding.minusBtn.setOnClickListener(new View.OnClickListener() {
+
+        // Sự kiện khi nhấn nút "Giảm số lượng"
+        binding.minusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (num > 1){
                     num = num - 1;
-                    biding.numTxt.setText(num+" ");
-                    biding.totalTxt.setText("$"+(num * object.getPrice()));
+                    binding.numTxt.setText(num+" ");
+                    binding.totalTxt.setText((num * object.getPrice()+" VNĐ"));
                 }
             }
         });
-        biding.addBtn.setOnClickListener(new View.OnClickListener() {
+
+        // Sự kiện khi nhấn nút "Thêm vào giỏ hàng"
+        binding.addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 object.setNumberInCart(num);
-                managmentCart.insertFood(object);
+                managementCart.insertFood(object);
             }
         });
     }
 
+    // Nhận dữ liệu từ Intent
     private void getIntentExtra() {
         object = (Foods) getIntent().getSerializableExtra("object");
     }

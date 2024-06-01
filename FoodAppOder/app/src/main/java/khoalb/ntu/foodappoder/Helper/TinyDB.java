@@ -53,12 +53,12 @@ public class TinyDB {
         preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
     }
 
-
     /**
-     * Decodes the Bitmap from 'path' and returns it
-     * @param path image path
-     * @return the Bitmap from 'path'
+     * Giải mã Bitmap từ 'đường dẫn' và trả về nó
+     * @param path đường dẫn hình ảnh
+     * @return Bitmap từ 'đường dẫn'
      */
+
     public Bitmap getImage(String path) {
         Bitmap bitmapFromPath = null;
         try {
@@ -72,23 +72,23 @@ public class TinyDB {
         return bitmapFromPath;
     }
 
-
     /**
-     * Returns the String path of the last saved image
-     * @return string path of the last saved image
+     * Trả về đường dẫn String của hình ảnh đã lưu gần đây nhất
+     * @return đường dẫn string của hình ảnh đã lưu gần đây nhất
      */
+
     public String getSavedImagePath() {
         return lastImagePath;
     }
 
-
     /**
-     * Saves 'theBitmap' into folder 'theFolder' with the name 'theImageName'
-     * @param theFolder the folder path dir you want to save it to e.g "DropBox/WorkImages"
-     * @param theImageName the name you want to assign to the image file e.g "MeAtLunch.png"
-     * @param theBitmap the image you want to save as a Bitmap
-     * @return returns the full path(file system address) of the saved image
+     * Lưu 'theBitmap' vào thư mục 'theFolder' với tên 'theImageName'
+     * @param theFolder đường dẫn thư mục bạn muốn lưu, ví dụ: "DropBox/WorkImages"
+     * @param theImageName tên bạn muốn đặt cho tệp hình ảnh, ví dụ: "MeAtLunch.png"
+     * @param theBitmap hình ảnh bạn muốn lưu dưới dạng Bitmap
+     * @return trả về đường dẫn đầy đủ (địa chỉ hệ thống tệp) của hình ảnh đã lưu
      */
+
     public String putImage(String theFolder, String theImageName, Bitmap theBitmap) {
         if (theFolder == null || theImageName == null || theBitmap == null)
             return null;
@@ -104,22 +104,23 @@ public class TinyDB {
         return mFullPath;
     }
 
-
     /**
-     * Saves 'theBitmap' into 'fullPath'
-     * @param fullPath full path of the image file e.g. "Images/MeAtLunch.png"
-     * @param theBitmap the image you want to save as a Bitmap
-     * @return true if image was saved, false otherwise
+     * Lưu 'theBitmap' vào 'fullPath'
+     * @param fullPath đường dẫn đầy đủ của tệp hình ảnh, ví dụ: "Images/MeAtLunch.png"
+     * @param theBitmap hình ảnh bạn muốn lưu dưới dạng Bitmap
+     * @return true nếu hình ảnh đã được lưu, ngược lại trả về false
      */
+
     public boolean putImageWithFullPath(String fullPath, Bitmap theBitmap) {
         return !(fullPath == null || theBitmap == null) && saveBitmap(fullPath, theBitmap);
     }
 
     /**
-     * Creates the path for the image with name 'imageName' in DEFAULT_APP.. directory
-     * @param imageName name of the image
-     * @return the full path of the image. If it failed to create directory, return empty string
+     * Tạo đường dẫn cho hình ảnh với tên 'imageName' trong thư mục DEFAULT_APP..
+     * @param imageName tên của hình ảnh
+     * @return đường dẫn đầy đủ của hình ảnh. Nếu không tạo được thư mục, trả về chuỗi rỗng
      */
+
     private String setupFullPath(String imageName) {
         File mFolder = new File(Environment.getExternalStorageDirectory(), DEFAULT_APP_IMAGEDATA_DIRECTORY);
 
@@ -134,11 +135,12 @@ public class TinyDB {
     }
 
     /**
-     * Saves the Bitmap as a PNG file at path 'fullPath'
-     * @param fullPath path of the image file
-     * @param bitmap the image as a Bitmap
-     * @return true if it successfully saved, false otherwise
+     * Lưu Bitmap dưới dạng tệp PNG tại đường dẫn 'fullPath'
+     * @param fullPath đường dẫn của tệp hình ảnh
+     * @param bitmap hình ảnh dưới dạng Bitmap
+     * @return true nếu lưu thành công, ngược lại trả về false
      */
+
     private boolean saveBitmap(String fullPath, Bitmap bitmap) {
         if (fullPath == null || bitmap == null)
             return false;
@@ -189,19 +191,21 @@ public class TinyDB {
     // Getters
 
     /**
-     * Get int value from SharedPreferences at 'key'. If key not found, return 0
-     * @param key SharedPreferences key
-     * @return int value at 'key' or 0 if key not found
+     * Lấy giá trị int từ SharedPreferences tại 'key'. Nếu không tìm thấy key, trả về 0
+     * @param key key của SharedPreferences
+     * @return giá trị int tại 'key' hoặc 0 nếu không tìm thấy key
      */
+
     public int getInt(String key) {
         return preferences.getInt(key, 0);
     }
 
     /**
-     * Get parsed ArrayList of Integers from SharedPreferences at 'key'
-     * @param key SharedPreferences key
-     * @return ArrayList of Integers
+     * Lấy danh sách ArrayList của các số nguyên đã được phân tích từ SharedPreferences tại 'key'
+     * @param key khóa của SharedPreferences
+     * @return ArrayList của các số nguyên
      */
+
     public ArrayList<Integer> getListInt(String key) {
         String[] myList = TextUtils.split(preferences.getString(key, ""), "‚‗‚");
         ArrayList<String> arrayToList = new ArrayList<String>(Arrays.asList(myList));
@@ -214,28 +218,31 @@ public class TinyDB {
     }
 
     /**
-     * Get long value from SharedPreferences at 'key'. If key not found, return 0
-     * @param key SharedPreferences key
-     * @return long value at 'key' or 0 if key not found
+     * Lấy giá trị long từ SharedPreferences tại 'key'. Nếu không tìm thấy key, trả về 0
+     * @param key khóa của SharedPreferences
+     * @return giá trị long tại 'key' hoặc 0 nếu không tìm thấy key
      */
+
     public long getLong(String key) {
         return preferences.getLong(key, 0);
     }
 
     /**
-     * Get float value from SharedPreferences at 'key'. If key not found, return 0
-     * @param key SharedPreferences key
-     * @return float value at 'key' or 0 if key not found
+     * Lấy giá trị float từ SharedPreferences tại 'key'. Nếu không tìm thấy key, trả về 0
+     * @param key khóa của SharedPreferences
+     * @return giá trị float tại 'key' hoặc 0 nếu không tìm thấy key
      */
+
     public float getFloat(String key) {
         return preferences.getFloat(key, 0);
     }
 
     /**
-     * Get double value from SharedPreferences at 'key'. If exception thrown, return 0
-     * @param key SharedPreferences key
-     * @return double value at 'key' or 0 if exception is thrown
+     * Lấy giá trị double từ SharedPreferences tại 'key'. Nếu có ngoại lệ xảy ra, trả về 0
+     * @param key khóa của SharedPreferences
+     * @return giá trị double tại 'key' hoặc 0 nếu có ngoại lệ xảy ra
      */
+
     public double getDouble(String key) {
         String number = getString(key);
 
@@ -248,10 +255,11 @@ public class TinyDB {
     }
 
     /**
-     * Get parsed ArrayList of Double from SharedPreferences at 'key'
-     * @param key SharedPreferences key
-     * @return ArrayList of Double
+     * Lấy danh sách ArrayList đã phân tích của các số Double từ SharedPreferences tại 'key'
+     * @param key khóa của SharedPreferences
+     * @return ArrayList của các số Double
      */
+
     public ArrayList<Double> getListDouble(String key) {
         String[] myList = TextUtils.split(preferences.getString(key, ""), "‚‗‚");
         ArrayList<String> arrayToList = new ArrayList<String>(Arrays.asList(myList));
@@ -264,10 +272,11 @@ public class TinyDB {
     }
 
     /**
-     * Get parsed ArrayList of Integers from SharedPreferences at 'key'
-     * @param key SharedPreferences key
-     * @return ArrayList of Longs
+     * Lấy danh sách ArrayList đã phân tích của các số nguyên từ SharedPreferences tại 'key'
+     * @param key khóa của SharedPreferences
+     * @return ArrayList của các số Long
      */
+
     public ArrayList<Long> getListLong(String key) {
         String[] myList = TextUtils.split(preferences.getString(key, ""), "‚‗‚");
         ArrayList<String> arrayToList = new ArrayList<String>(Arrays.asList(myList));
@@ -280,37 +289,41 @@ public class TinyDB {
     }
 
     /**
-     * Get String value from SharedPreferences at 'key'. If key not found, return ""
-     * @param key SharedPreferences key
-     * @return String value at 'key' or "" (empty String) if key not found
+     * Lấy giá trị String từ SharedPreferences tại 'key'. Nếu không tìm thấy key, trả về "" (chuỗi rỗng)
+     * @param key khóa của SharedPreferences
+     * @return giá trị String tại 'key' hoặc "" (chuỗi rỗng) nếu không tìm thấy key
      */
+
     public String getString(String key) {
         return preferences.getString(key, "");
     }
 
     /**
-     * Get parsed ArrayList of String from SharedPreferences at 'key'
-     * @param key SharedPreferences key
-     * @return ArrayList of String
+     * Lấy danh sách ArrayList đã phân tích của các chuỗi từ SharedPreferences tại 'key'
+     * @param key khóa của SharedPreferences
+     * @return ArrayList của các chuỗi
      */
+
     public ArrayList<String> getListString(String key) {
         return new ArrayList<String>(Arrays.asList(TextUtils.split(preferences.getString(key, ""), "‚‗‚")));
     }
 
     /**
-     * Get boolean value from SharedPreferences at 'key'. If key not found, return false
-     * @param key SharedPreferences key
-     * @return boolean value at 'key' or false if key not found
+     * Lấy giá trị boolean từ SharedPreferences tại 'key'. Nếu không tìm thấy key, trả về false
+     * @param key khóa của SharedPreferences
+     * @return giá trị boolean tại 'key' hoặc false nếu không tìm thấy key
      */
+
     public boolean getBoolean(String key) {
         return preferences.getBoolean(key, false);
     }
 
     /**
-     * Get parsed ArrayList of Boolean from SharedPreferences at 'key'
-     * @param key SharedPreferences key
-     * @return ArrayList of Boolean
+     * Lấy danh sách ArrayList đã phân tích của các giá trị boolean từ SharedPreferences tại 'key'
+     * @param key khóa của SharedPreferences
+     * @return ArrayList của các giá trị boolean
      */
+
     public ArrayList<Boolean> getListBoolean(String key) {
         ArrayList<String> myList = getListString(key);
         ArrayList<Boolean> newList = new ArrayList<Boolean>();
@@ -326,7 +339,6 @@ public class TinyDB {
         return newList;
     }
 
-
     public ArrayList<Foods> getListObject(String key){
         Gson gson = new Gson();
 
@@ -339,9 +351,6 @@ public class TinyDB {
         }
         return playerList;
     }
-
-
-
     public <T> T getObject(String key, Class<T> classOfT){
 
         String json = getString(key);
@@ -350,25 +359,25 @@ public class TinyDB {
             throw new NullPointerException();
         return (T)value;
     }
-
-
-    // Put methods
+    // Các phương thức Put
 
     /**
-     * Put int value into SharedPreferences with 'key' and save
-     * @param key SharedPreferences key
-     * @param value int value to be added
+     * Đặt giá trị int vào SharedPreferences với 'key' và lưu
+     * @param key khóa của SharedPreferences
+     * @param value giá trị int để thêm vào
      */
+
     public void putInt(String key, int value) {
         checkForNullKey(key);
         preferences.edit().putInt(key, value).apply();
     }
 
     /**
-     * Put ArrayList of Integer into SharedPreferences with 'key' and save
-     * @param key SharedPreferences key
-     * @param intList ArrayList of Integer to be added
+     * Đặt danh sách ArrayList của Integer vào SharedPreferences với 'key' và lưu
+     * @param key khóa của SharedPreferences
+     * @param intList ArrayList của Integer để thêm vào
      */
+
     public void putListInt(String key, ArrayList<Integer> intList) {
         checkForNullKey(key);
         Integer[] myIntList = intList.toArray(new Integer[intList.size()]);
@@ -376,20 +385,22 @@ public class TinyDB {
     }
 
     /**
-     * Put long value into SharedPreferences with 'key' and save
-     * @param key SharedPreferences key
-     * @param value long value to be added
+     * Đặt giá trị long vào SharedPreferences với 'key' và lưu
+     * @param key khóa của SharedPreferences
+     * @param value giá trị long để thêm vào
      */
+
     public void putLong(String key, long value) {
         checkForNullKey(key);
         preferences.edit().putLong(key, value).apply();
     }
 
     /**
-     * Put ArrayList of Long into SharedPreferences with 'key' and save
-     * @param key SharedPreferences key
-     * @param longList ArrayList of Long to be added
+     * Đặt danh sách ArrayList của Long vào SharedPreferences với 'key' và lưu
+     * @param key khóa của SharedPreferences
+     * @param longList ArrayList của Long để thêm vào
      */
+
     public void putListLong(String key, ArrayList<Long> longList) {
         checkForNullKey(key);
         Long[] myLongList = longList.toArray(new Long[longList.size()]);
@@ -397,30 +408,33 @@ public class TinyDB {
     }
 
     /**
-     * Put float value into SharedPreferences with 'key' and save
-     * @param key SharedPreferences key
-     * @param value float value to be added
+     * Đặt giá trị float vào SharedPreferences với 'key' và lưu
+     * @param key khóa của SharedPreferences
+     * @param value giá trị float để thêm vào
      */
+
     public void putFloat(String key, float value) {
         checkForNullKey(key);
         preferences.edit().putFloat(key, value).apply();
     }
 
     /**
-     * Put double value into SharedPreferences with 'key' and save
-     * @param key SharedPreferences key
-     * @param value double value to be added
+     * Đặt giá trị double vào SharedPreferences với 'key' và lưu
+     * @param key khóa của SharedPreferences
+     * @param value giá trị double để thêm vào
      */
+
     public void putDouble(String key, double value) {
         checkForNullKey(key);
         putString(key, String.valueOf(value));
     }
 
     /**
-     * Put ArrayList of Double into SharedPreferences with 'key' and save
-     * @param key SharedPreferences key
-     * @param doubleList ArrayList of Double to be added
+     * Đặt danh sách ArrayList của Double vào SharedPreferences với 'key' và lưu
+     * @param key khóa của SharedPreferences
+     * @param doubleList ArrayList của Double để thêm vào
      */
+
     public void putListDouble(String key, ArrayList<Double> doubleList) {
         checkForNullKey(key);
         Double[] myDoubleList = doubleList.toArray(new Double[doubleList.size()]);
@@ -428,20 +442,22 @@ public class TinyDB {
     }
 
     /**
-     * Put String value into SharedPreferences with 'key' and save
-     * @param key SharedPreferences key
-     * @param value String value to be added
+     * Đặt giá trị String vào SharedPreferences với 'key' và lưu
+     * @param key khóa của SharedPreferences
+     * @param value giá trị String để thêm vào
      */
+
     public void putString(String key, String value) {
         checkForNullKey(key); checkForNullValue(value);
         preferences.edit().putString(key, value).apply();
     }
 
     /**
-     * Put ArrayList of String into SharedPreferences with 'key' and save
-     * @param key SharedPreferences key
-     * @param stringList ArrayList of String to be added
+     * Đặt danh sách ArrayList của String vào SharedPreferences với 'key' và lưu
+     * @param key khóa của SharedPreferences
+     * @param stringList danh sách ArrayList của String để thêm vào
      */
+
     public void putListString(String key, ArrayList<String> stringList) {
         checkForNullKey(key);
         String[] myStringList = stringList.toArray(new String[stringList.size()]);
@@ -449,20 +465,22 @@ public class TinyDB {
     }
 
     /**
-     * Put boolean value into SharedPreferences with 'key' and save
-     * @param key SharedPreferences key
-     * @param value boolean value to be added
+     * Đặt giá trị boolean vào SharedPreferences với 'key' và lưu
+     * @param key khóa của SharedPreferences
+     * @param value giá trị boolean để thêm vào
      */
+
     public void putBoolean(String key, boolean value) {
         checkForNullKey(key);
         preferences.edit().putBoolean(key, value).apply();
     }
 
     /**
-     * Put ArrayList of Boolean into SharedPreferences with 'key' and save
-     * @param key SharedPreferences key
-     * @param boolList ArrayList of Boolean to be added
+     * Đặt danh sách ArrayList của Boolean vào SharedPreferences với 'key' và lưu
+     * @param key khóa của SharedPreferences
+     * @param boolList danh sách ArrayList của Boolean để thêm vào
      */
+
     public void putListBoolean(String key, ArrayList<Boolean> boolList) {
         checkForNullKey(key);
         ArrayList<String> newList = new ArrayList<String>();
@@ -479,10 +497,11 @@ public class TinyDB {
     }
 
     /**
-     * Put ObJect any type into SharedPrefrences with 'key' and save
-     * @param key SharedPreferences key
-     * @param obj is the Object you want to put
+     * Đặt đối tượng bất kỳ vào SharedPreferences với 'key' và lưu
+     * @param key khóa của SharedPreferences
+     * @param obj là đối tượng bạn muốn đặt
      */
+
     public void putObject(String key, Object obj){
     	checkForNullKey(key);
     	Gson gson = new Gson();
@@ -500,43 +519,46 @@ public class TinyDB {
     }
 
     /**
-     * Remove SharedPreferences item with 'key'
-     * @param key SharedPreferences key
+     * Xóa mục SharedPreferences với 'key'
+     * @param key khóa của SharedPreferences
      */
+
     public void remove(String key) {
         preferences.edit().remove(key).apply();
     }
 
     /**
-     * Delete image file at 'path'
-     * @param path path of image file
-     * @return true if it successfully deleted, false otherwise
+     * Xóa tệp hình ảnh tại 'đường dẫn'
+     * @param path đường dẫn của tệp hình ảnh
+     * @return true nếu nó đã được xóa thành công, ngược lại trả về false
      */
+
     public boolean deleteImage(String path) {
         return new File(path).delete();
     }
 
-
     /**
-     * Clear SharedPreferences (remove everything)
+     * Xóa sạch SharedPreferences (loại bỏ tất cả mọi thứ)
      */
+
     public void clear() {
         preferences.edit().clear().apply();
     }
 
     /**
-     * Retrieve all values from SharedPreferences. Do not modify collection return by method
-     * @return a Map representing a list of key/value pairs from SharedPreferences
+     * Lấy tất cả các giá trị từ SharedPreferences. Không chỉnh sửa bộ sưu tập được trả về bởi phương thức
+     * @return Một Map biểu diễn một danh sách các cặp key/value từ SharedPreferences
      */
+
     public Map<String, ?> getAll() {
         return preferences.getAll();
     }
 
-
     /**
-     * Register SharedPreferences change listener
-     * @param listener listener object of OnSharedPreferenceChangeListener
+     * Đăng ký trình nghe thay đổi SharedPreferences
+     * @param listener đối tượng trình nghe của OnSharedPreferenceChangeListener
      */
+
     public void registerOnSharedPreferenceChangeListener(
             SharedPreferences.OnSharedPreferenceChangeListener listener) {
 
@@ -544,28 +566,30 @@ public class TinyDB {
     }
 
     /**
-     * Unregister SharedPreferences change listener
-     * @param listener listener object of OnSharedPreferenceChangeListener to be unregistered
+     * Hủy đăng ký trình nghe thay đổi SharedPreferences
+     * @param listener đối tượng trình nghe của OnSharedPreferenceChangeListener sẽ được hủy đăng ký
      */
+
     public void unregisterOnSharedPreferenceChangeListener(
             SharedPreferences.OnSharedPreferenceChangeListener listener) {
 
         preferences.unregisterOnSharedPreferenceChangeListener(listener);
     }
 
-
     /**
-     * Check if external storage is writable or not
-     * @return true if writable, false otherwise
+     * Kiểm tra xem bộ nhớ ngoài có thể ghi được hay không
+     * @return true nếu có thể ghi được, false nếu ngược lại
      */
+
     public static boolean isExternalStorageWritable() {
         return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
 
     /**
-     * Check if external storage is readable or not
-     * @return true if readable, false otherwise
+     * Kiểm tra xem bộ nhớ ngoài có thể đọc được hay không
+     * @return true nếu có thể đọc được, false nếu ngược lại
      */
+
     public static boolean isExternalStorageReadable() {
         String state = Environment.getExternalStorageState();
 
@@ -573,18 +597,20 @@ public class TinyDB {
                 Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
     }
     /**
-     * null keys would corrupt the shared pref file and make them unreadable this is a preventive measure
-     * @param key the pref key to check
+     * Các khóa null sẽ làm hỏng tệp shared pref và làm cho chúng không đọc được, đây là biện pháp phòng ngừa
+     * @param key khóa pref cần kiểm tra
      */
+
     private void checkForNullKey(String key){
         if (key == null){
             throw new NullPointerException();
         }
     }
     /**
-     * null keys would corrupt the shared pref file and make them unreadable this is a preventive measure
-     * @param value the pref value to check
+     * Các giá trị null sẽ làm hỏng tệp shared pref và làm cho chúng không đọc được, đây là biện pháp phòng ngừa
+     * @param value giá trị pref cần kiểm tra
      */
+
     private void checkForNullValue(String value){
         if (value == null){
             throw new NullPointerException();

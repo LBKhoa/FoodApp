@@ -48,6 +48,7 @@ public class MainActivity extends BaseActivity {
             return insets;
         });
 
+        // Khởi tạo các phần giao diện
         initLocation();
         initTime();
         initPrice();
@@ -57,7 +58,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void setVariable() {
-
+        // Lấy dữ liệu được truyền từ intent
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
 
@@ -66,6 +67,7 @@ public class MainActivity extends BaseActivity {
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Đăng xuất người dùng khi nhấn nút đăng xuất
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
@@ -73,6 +75,7 @@ public class MainActivity extends BaseActivity {
         binding.searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Tìm kiếm các món ăn khi nhấn nút tìm kiếm
                 String text = binding.searchEdt.getText().toString();
                 if (!text.isEmpty()){
                     Intent intent = new Intent(MainActivity.this,ListFoodsActivity.class);
@@ -86,12 +89,14 @@ public class MainActivity extends BaseActivity {
         binding.cartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Mở màn hình giỏ hàng khi nhấn nút giỏ hàng
                 startActivity(new Intent(MainActivity.this, CartActivity.class));
             }
         });
     }
 
     private void initBestFood() {
+        // Lấy danh sách các món ăn phổ biến
         DatabaseReference myRef = database.getReference("Foods");
         binding.progressBarBestFood.setVisibility(View.VISIBLE);
         ArrayList<Foods> list = new ArrayList<>();
@@ -118,7 +123,9 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+    // Khởi tạo danh sách danh mục
     private void initCategory() {
+        // Lấy danh sách các danh mục
         DatabaseReference myRef = database.getReference("Category");
         binding.progressBarCategory.setVisibility(View.VISIBLE);
         ArrayList<Category> list = new ArrayList<>();
@@ -145,6 +152,7 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    // Khởi tạo danh sách địa điểm
     private void initLocation() {
         DatabaseReference myRef = database.getReference("Location");
         ArrayList<Location> list = new ArrayList<>();
@@ -153,9 +161,11 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
+                    // Lặp qua các dữ liệu trong snapshot để lấy danh sách địa điểm
                     for (DataSnapshot issue: snapshot.getChildren()){
                         list.add(issue.getValue(Location.class));
                     }
+                    // Tạo adapter để hiển thị danh sách địa điểm trên Spinner
                     ArrayAdapter<Location>  adapter = new ArrayAdapter<>(MainActivity.this, R.layout.sp_item,list);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     binding.locationSp.setAdapter(adapter);
@@ -164,10 +174,12 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Xử lý khi có lỗi xảy ra trong quá trình đọc dữ liệu
             }
         });
     }
+
+    // Khởi tạo danh sách thời gian
     private void initTime() {
         DatabaseReference myRef = database.getReference("Time");
         ArrayList<Time> list = new ArrayList<>();
@@ -176,9 +188,11 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
+                    // Lặp qua các dữ liệu trong snapshot để lấy danh sách thời gian
                     for (DataSnapshot issue: snapshot.getChildren()){
                         list.add(issue.getValue(Time.class));
                     }
+                    // Tạo adapter để hiển thị danh sách thời gian trên Spinner
                     ArrayAdapter<Time>  adapter = new ArrayAdapter<>(MainActivity.this, R.layout.sp_item,list);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     binding.timeSp.setAdapter(adapter);
@@ -187,10 +201,12 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Xử lý khi có lỗi xảy ra trong quá trình đọc dữ liệu
             }
         });
     }
+
+    // Khởi tạo danh sách giá
     private void initPrice() {
         DatabaseReference myRef = database.getReference("Price");
         ArrayList<Price> list = new ArrayList<>();
@@ -199,9 +215,11 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
+                    // Lặp qua các dữ liệu trong snapshot để lấy danh sách giá
                     for (DataSnapshot issue: snapshot.getChildren()){
                         list.add(issue.getValue(Price.class));
                     }
+                    // Tạo adapter để hiển thị danh sách giá trên Spinner
                     ArrayAdapter<Price>  adapter = new ArrayAdapter<>(MainActivity.this, R.layout.sp_item,list);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     binding.priceSp.setAdapter(adapter);
@@ -210,8 +228,9 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Xử lý khi có lỗi xảy ra trong quá trình đọc dữ liệu
             }
         });
     }
+
 }

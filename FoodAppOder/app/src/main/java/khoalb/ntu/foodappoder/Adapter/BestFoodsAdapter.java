@@ -25,6 +25,7 @@ public class BestFoodsAdapter extends RecyclerView.Adapter<BestFoodsAdapter.view
     ArrayList<Foods> items;
     Context context;
 
+    // Constructor để nhận danh sách các mặt hàng tốt nhất
     public BestFoodsAdapter(ArrayList<Foods> items) {
         this.items = items;
     }
@@ -33,42 +34,49 @@ public class BestFoodsAdapter extends RecyclerView.Adapter<BestFoodsAdapter.view
     @Override
     public BestFoodsAdapter.viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
+        // Gắn kết giao diện cho mỗi mục danh sách
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_best_deal,parent, false);
         return new viewholder(inflate);
     }
 
     @Override
     public void onBindViewHolder(@NonNull BestFoodsAdapter.viewholder holder, int position) {
+        // Hiển thị thông tin của mỗi mặt hàng tốt nhất
         holder.titleTxt.setText(items.get(position).getTitle());
-        holder.priceTxt.setText("$"+items.get(position).getPrice());
-        holder.timeTxt.setText(items.get(position).getTimeValue()+"phút");
+        holder.priceTxt.setText(items.get(position).getPrice()+" VNĐ");
+        holder.timeTxt.setText(items.get(position).getTimeValue()+" phút");
         holder.starTxt.setText(""+items.get(position).getStar());
 
+        // Sử dụng thư viện Glide để tải hình ảnh từ URL và hiển thị
         Glide.with(context)
                 .load(items.get(position).getImagePath())
                 .transform(new CenterCrop(),new RoundedCorners(30))
                 .into(holder.pic);
 
+        // Xử lý sự kiện nhấp vào một mặt hàng để mở chi tiết
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("object", items.get(position));
-                context.startActivity(intent);
+                intent.putExtra("object", items.get(position)); // Chuyển đối tượng được chọn qua DetailActivity
+                context.startActivity(intent); // Khởi chạy DetailActivity
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return items.size(); // Trả về số lượng mặt hàng trong danh sách
     }
 
+    // Lớp viewholder để giữ các thành phần giao diện của mỗi mục danh sách
     public class viewholder extends RecyclerView.ViewHolder {
         TextView titleTxt, priceTxt, starTxt, timeTxt;
         ImageView pic;
-         public viewholder(@NonNull View itemView) {
+
+        public viewholder(@NonNull View itemView) {
             super(itemView);
+            // Liên kết các thành phần giao diện với các biến tương ứng
             titleTxt = itemView.findViewById(R.id.titleTxt);
             priceTxt = itemView.findViewById(R.id.priceTxt);
             starTxt = itemView.findViewById(R.id.starTxt);

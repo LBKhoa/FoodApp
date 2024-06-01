@@ -15,7 +15,6 @@ import khoalb.ntu.foodappoder.R;
 
 public class OrderSuccessfulActivity extends AppCompatActivity {
     Button btnHome;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,15 +26,17 @@ public class OrderSuccessfulActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Tìm và liên kết nút "btnHome" từ tệp tin layout XML
         btnHome = findViewById(R.id.btnHome);
 
+        // Định nghĩa hành động khi nút "btnHome" được nhấp vào
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Tạo Intent để chuyển đến MainActivity khi nút "btnHome" được nhấp vào
                 Intent intent = new Intent(OrderSuccessfulActivity.this, MainActivity.class);
-                startActivity(intent);
+                startActivity(intent); // Bắt đầu activity mới
             }
         });
     }
-
 }
