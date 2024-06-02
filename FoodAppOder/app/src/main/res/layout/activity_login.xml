@@ -58,7 +58,7 @@
                 android:textColor="@color/blue_gray"/>
         </LinearLayout>
         <EditText
-            android:id="@+id/login_user"
+            android:id="@+id/edtLoginUser"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="32dp"
@@ -75,7 +75,7 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/login_pass"
+            android:id="@+id/edtLoginPass"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="32dp"

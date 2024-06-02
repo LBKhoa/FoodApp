@@ -8,7 +8,7 @@ public class Foods implements Serializable {
     private boolean BestFood;
     private int Id;
     private int LocationId;
-    private double Price;
+    private long Price;
     private String ImagePath;
     private int PriceId;
     private double Star;
@@ -65,11 +65,11 @@ public class Foods implements Serializable {
         this.LocationId = locationId;
     }
 
-    public double getPrice() {
+    public long getPrice() {
         return Price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(long price) {
         Price = price;
     }
 

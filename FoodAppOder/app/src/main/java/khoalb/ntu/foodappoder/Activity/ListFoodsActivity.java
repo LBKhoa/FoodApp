@@ -72,7 +72,6 @@ public class ListFoodsActivity extends BaseActivity {
         } else {
             query = myRef.orderByChild("CategoryId").equalTo(CategoryId);
         }
-
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -87,14 +86,11 @@ public class ListFoodsActivity extends BaseActivity {
                     binding.progressBar.setVisibility(View.GONE);
                 } else {
                     binding.progressBar.setVisibility(View.GONE);
-                    // Xử lý trường hợp không tìm thấy dữ liệu, có thể hiển thị một thông báo cho người dùng
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 binding.progressBar.setVisibility(View.GONE);
-                // Xử lý lỗi, có thể hiển thị một thông báo cho người dùng
             }
         });
     }

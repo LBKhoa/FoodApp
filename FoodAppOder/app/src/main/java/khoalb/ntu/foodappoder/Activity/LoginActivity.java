@@ -47,8 +47,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Ánh xạ các thành phần giao diện
-        loginUsername = findViewById(R.id.login_user);
-        loginPassword = findViewById(R.id.login_pass);
+        loginUsername = findViewById(R.id.edtLoginUser);
+        loginPassword = findViewById(R.id.edtLoginPass);
         loginBtn = findViewById(R.id.loginBtn);
         signupRedirecTxt = findViewById(R.id.sigupRedirecTxt);
 

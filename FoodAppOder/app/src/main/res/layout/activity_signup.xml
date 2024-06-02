@@ -59,7 +59,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/signup_name"
+            android:id="@+id/edtSignupName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="32dp"
@@ -76,7 +76,7 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/signup_email"
+            android:id="@+id/edtSignupEmail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="32dp"
@@ -93,7 +93,7 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/signup_user"
+            android:id="@+id/edtSignupUser"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="32dp"
@@ -110,7 +110,7 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/signup_pass"
+            android:id="@+id/edtSignupPass"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="32dp"

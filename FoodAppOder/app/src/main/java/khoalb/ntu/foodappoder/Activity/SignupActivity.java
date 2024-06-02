@@ -47,10 +47,10 @@ public class SignupActivity extends AppCompatActivity {
         });
 
         // Liên kết các thành phần giao diện với các biến tương ứng
-        signupName = findViewById(R.id.signup_name);
-        signupEmail = findViewById(R.id.signup_email);
-        signupUsername = findViewById(R.id.signup_user);
-        signupPassword = findViewById(R.id.signup_pass);
+        signupName = findViewById(R.id.edtSignupName);
+        signupEmail = findViewById(R.id.edtSignupEmail);
+        signupUsername = findViewById(R.id.edtSignupUser);
+        signupPassword = findViewById(R.id.edtSignupPass);
         signupBtn = findViewById(R.id.signupBtn);
         loginRedirecTxt = findViewById(R.id.loginRedirecTxt);
 
@@ -58,7 +58,7 @@ public class SignupActivity extends AppCompatActivity {
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Khởi tạo Firebase Database và DatabaseReference
+                // Khởi tạo Firebase Database và DatabaseReferences
                 database = FirebaseDatabase.getInstance();
                 reference = database.getReference("users");
 

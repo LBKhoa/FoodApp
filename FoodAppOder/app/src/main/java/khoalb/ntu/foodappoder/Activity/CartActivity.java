@@ -62,9 +62,9 @@ public class CartActivity extends BaseActivity {
 
     // Tính toán tổng giỏ hàng
     private void calculateCart() {
-        double delivery = 10000.0;
-        double total = Math.round(managmentCart.getTotalFee()+ delivery);
-        double itemTotal = Math.round(managmentCart.getTotalFee());
+        int delivery = 10000;
+        long total = Math.round(managmentCart.getTotalFee()+ delivery);
+        long itemTotal = Math.round(managmentCart.getTotalFee());
 
         binding.totalFeeTxt.setText(itemTotal+" VNĐ");
         binding.deliveryTxt.setText(delivery+" VNĐ");
@@ -83,7 +83,7 @@ public class CartActivity extends BaseActivity {
 
     // Thiết lập sự kiện khi nhấn nút "Order"
     private void setVariable2() {
-        binding.btnOrder.setOnClickListener(new View.OnClickListener() {
+        binding.orderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Xóa các mục trong giỏ hàng trước khi chuyển sang màn hình thành công

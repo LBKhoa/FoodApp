@@ -140,7 +140,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnOrder"
+                android:id="@+id/orderBtn"
                 style="@android:style/Widget.Button"
                 android:layout_width="match_parent"
 

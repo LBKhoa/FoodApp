@@ -46,7 +46,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.viewholdel> {
         // Hiển thị thông tin của mỗi mặt hàng trong giỏ hàng
         holder.title.setText(list.get(position).getTitle());
         holder.feeEachItem.setText((list.get(position).getNumberInCart() * list.get(position).getPrice()) + " VNĐ");
-        holder.totalEachItem.setText(list.get(position).getNumberInCart() + " * VNĐ" + (list.get(position).getPrice()));
+        holder.totalEachItem.setText(list.get(position).getNumberInCart() + " * " + (list.get(position).getPrice())+" VNĐ");
         holder.num.setText(list.get(position).getNumberInCart() + "");
 
         // Sử dụng Glide để tải hình ảnh từ URL và hiển thị
