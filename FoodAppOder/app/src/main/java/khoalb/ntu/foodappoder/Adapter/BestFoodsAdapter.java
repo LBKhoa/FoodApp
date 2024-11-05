@@ -25,7 +25,6 @@ public class BestFoodsAdapter extends RecyclerView.Adapter<BestFoodsAdapter.view
     ArrayList<Foods> items;
     Context context;
 
-    // Constructor để nhận danh sách các mặt hàng tốt nhất
     public BestFoodsAdapter(ArrayList<Foods> items) {
         this.items = items;
     }

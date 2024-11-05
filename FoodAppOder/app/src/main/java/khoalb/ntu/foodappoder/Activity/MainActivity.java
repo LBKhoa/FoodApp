@@ -227,7 +227,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Xử lý khi có lỗi xảy ra trong quá trình đọc dữ liệu
+
             }
         });
     }
